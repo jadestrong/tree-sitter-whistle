@@ -1,0 +1,521 @@
+{
+  "name": "whistle",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_line"
+      }
+    },
+    "_line": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rule"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\r?\\n"
+        }
+      ]
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "#"
+          },
+          {
+            "type": "PATTERN",
+            "value": ".*"
+          }
+        ]
+      }
+    },
+    "rule": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "negation",
+              "content": {
+                "type": "SYMBOL",
+                "name": "negation"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "pattern",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_pattern"
+          }
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_operator"
+            }
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\r"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\n"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "negation": {
+      "type": "STRING",
+      "value": "!"
+    },
+    "_pattern": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "regexp_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "regexp_pattern_no_flag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dollar_regexp"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "port_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "url_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "wildcard_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ipv6_with_brackets"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ipv4_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ipv6_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "local_path_windows"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "local_path_unix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "macro_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "at_reference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "plugin_var"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "domain_pattern"
+        }
+      ]
+    },
+    "regexp_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "/"
+            },
+            {
+              "type": "PATTERN",
+              "value": "(?:[^/\\n\\\\]|\\\\.)+"
+            },
+            {
+              "type": "STRING",
+              "value": "/"
+            },
+            {
+              "type": "STRING",
+              "value": "i"
+            }
+          ]
+        }
+      }
+    },
+    "regexp_pattern_no_flag": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\/(?:[^/\\n\\\\]|\\\\.)+\\/"
+        }
+      }
+    },
+    "dollar_regexp": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "$"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\\s#]+"
+          }
+        ]
+      }
+    },
+    "port_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": ":\\d{1,5}"
+      }
+    },
+    "url_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\^[^\\s#]+"
+      }
+    },
+    "wildcard_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "(?:\\$?(?:https?:|wss?:|tunnel:)?\\/\\/)[^\\s#]*[*~][^\\s#]*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\\s#/]*[*~][^\\s#]*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\.[^.\\s#/?]+\\.[^\\s#/?]+"
+          }
+        ]
+      }
+    },
+    "ipv6_with_brackets": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\[[\\da-f:]+\\](?::\\d+)?"
+      }
+    },
+    "ipv4_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "(?:::(?:ffff:)?)?(?:(?:25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)(?::\\d+)?"
+      }
+    },
+    "ipv6_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[\\da-f]{1,4}(?::[\\da-f]{1,4}){7}"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[\\da-f]{1,4}(?::[\\da-f]{1,4}){0,6}::"
+          },
+          {
+            "type": "PATTERN",
+            "value": "::[\\da-f]{1,4}(?::[\\da-f]{1,4}){0,6}"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[\\da-f]{1,4}(?::[\\da-f]{1,4}){0,5}::[\\da-f]{1,4}(?::[\\da-f]{1,4}){0,5}"
+          }
+        ]
+      }
+    },
+    "local_path_windows": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 10,
+        "content": {
+          "type": "PATTERN",
+          "value": "[A-Za-z]:[\\\\\\/][^\\s#]*"
+        }
+      }
+    },
+    "local_path_unix": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 5,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\/[^\\s#/]+\\/[^\\s#]*"
+        }
+      }
+    },
+    "macro_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\\{[^}\\s]+\\}"
+          },
+          {
+            "type": "PATTERN",
+            "value": "<[^>\\s]+>"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\([^)\\s]+\\)"
+          }
+        ]
+      }
+    },
+    "at_reference": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "@[^\\s#]+"
+      }
+    },
+    "plugin_var": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "%[a-z\\d_-]+[=.][^\\s#]*"
+      }
+    },
+    "domain_pattern": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\s#:!][^\\s#:]*"
+      }
+    },
+    "_operator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "protocol_operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "plugin_operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "simple_value"
+        }
+      ]
+    },
+    "protocol_operator": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "protocol",
+            "content": {
+              "type": "SYMBOL",
+              "name": "protocol_name"
+            }
+          },
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "://"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "value",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "operator_value"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "protocol_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "x?(?:file|tpl|rawfile)|https?|wss?|tunnel|x?(?:proxy|http-proxy|https-proxy|http2https-proxy|https2http-proxy|internal-proxy|internal-http-proxy|internal-https-proxy|socks)|pac|x?hosts?|head|referer|auth|ua|forwardedFor|reqCookies|reqDelay|reqSpeed|reqCors|reqHeaders|method|reqType|reqCharset|reqBody|reqPrepend|reqAppend|reqReplace|reqWrite|reqWriteRaw|reqScript|reqRules|reqMerge|urlParams|params|urlReplace|pathReplace|resScript|frameScript|resRules|responseFor|resCookies|resHeaders|trailers|replaceStatus|resDelay|resSpeed|resCors|resType|resCharset|cache|attachment|download|resBody|resPrepend|resAppend|resReplace|resMerge|resWrite|resWriteRaw|(?:html|css|js)(?:Append|Prepend|Body)|excludeFilter|includeFilter|filter|ignore|skip|enable|disable|delete|lineProps|weinre|log|style|headerReplace|cipher|tlsOptions|pipe|sniCallback|redirect|locationHref|statusCode"
+        }
+      }
+    },
+    "plugin_operator": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "plugin",
+            "content": {
+              "type": "SYMBOL",
+              "name": "plugin_full_name"
+            }
+          },
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "://"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "value",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "operator_value"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "plugin_full_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 4,
+        "content": {
+          "type": "PATTERN",
+          "value": "(?:plugin|whistle)\\.[a-z\\d_-]+"
+        }
+      }
+    },
+    "operator_value": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 10,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\s#]+"
+        }
+      }
+    },
+    "simple_value": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\s#]+"
+        }
+      }
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "[ \\t]"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+

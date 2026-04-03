@@ -14,6 +14,7 @@
 
 ; Regular expressions
 (regexp_pattern) @string.regexp
+(regexp_pattern_no_flag) @string.regexp
 (dollar_regexp) @string.regexp
 
 ; Special patterns
@@ -107,7 +108,6 @@
 
 ; Plugin operators
 (plugin_full_name) @namespace
-(plugin_short_name) @namespace
 
 ; ========================================
 ; Values

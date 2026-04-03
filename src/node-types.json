@@ -1,0 +1,269 @@
+[
+  {
+    "type": "plugin_operator",
+    "named": true,
+    "fields": {
+      "plugin": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "plugin_full_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "operator_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "protocol_operator",
+    "named": true,
+    "fields": {
+      "protocol": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "protocol_name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "operator_value",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "rule",
+    "named": true,
+    "fields": {
+      "negation": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "negation",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "plugin_operator",
+            "named": true
+          },
+          {
+            "type": "protocol_operator",
+            "named": true
+          },
+          {
+            "type": "simple_value",
+            "named": true
+          }
+        ]
+      },
+      "pattern": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "at_reference",
+            "named": true
+          },
+          {
+            "type": "dollar_regexp",
+            "named": true
+          },
+          {
+            "type": "domain_pattern",
+            "named": true
+          },
+          {
+            "type": "ipv4_pattern",
+            "named": true
+          },
+          {
+            "type": "ipv6_pattern",
+            "named": true
+          },
+          {
+            "type": "ipv6_with_brackets",
+            "named": true
+          },
+          {
+            "type": "local_path_unix",
+            "named": true
+          },
+          {
+            "type": "local_path_windows",
+            "named": true
+          },
+          {
+            "type": "macro_pattern",
+            "named": true
+          },
+          {
+            "type": "plugin_var",
+            "named": true
+          },
+          {
+            "type": "port_pattern",
+            "named": true
+          },
+          {
+            "type": "regexp_pattern",
+            "named": true
+          },
+          {
+            "type": "regexp_pattern_no_flag",
+            "named": true
+          },
+          {
+            "type": "url_pattern",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "rule",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\r",
+    "named": false
+  },
+  {
+    "type": "://",
+    "named": false
+  },
+  {
+    "type": "at_reference",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "dollar_regexp",
+    "named": true
+  },
+  {
+    "type": "domain_pattern",
+    "named": true
+  },
+  {
+    "type": "ipv4_pattern",
+    "named": true
+  },
+  {
+    "type": "ipv6_pattern",
+    "named": true
+  },
+  {
+    "type": "ipv6_with_brackets",
+    "named": true
+  },
+  {
+    "type": "local_path_unix",
+    "named": true
+  },
+  {
+    "type": "local_path_windows",
+    "named": true
+  },
+  {
+    "type": "macro_pattern",
+    "named": true
+  },
+  {
+    "type": "negation",
+    "named": true
+  },
+  {
+    "type": "operator_value",
+    "named": true
+  },
+  {
+    "type": "plugin_full_name",
+    "named": true
+  },
+  {
+    "type": "plugin_var",
+    "named": true
+  },
+  {
+    "type": "port_pattern",
+    "named": true
+  },
+  {
+    "type": "protocol_name",
+    "named": true
+  },
+  {
+    "type": "regexp_pattern",
+    "named": true
+  },
+  {
+    "type": "regexp_pattern_no_flag",
+    "named": true
+  },
+  {
+    "type": "simple_value",
+    "named": true
+  },
+  {
+    "type": "url_pattern",
+    "named": true
+  },
+  {
+    "type": "wildcard_pattern",
+    "named": true
+  }
+]
