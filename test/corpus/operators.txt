@@ -1,0 +1,388 @@
+==================
+Request header modification
+==================
+
+example.com reqHeaders://{headers.json}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Response body replacement
+==================
+
+api.example.com resBody://{response.json}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Method override
+==================
+
+example.com method://POST
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+User agent override
+==================
+
+example.com ua://Mozilla/5.0
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Status code modification
+==================
+
+example.com statusCode://404
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+HTML injection
+==================
+
+example.com htmlAppend://{script.html}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+CSS injection
+==================
+
+example.com cssPrepend://{custom.css}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+JavaScript injection
+==================
+
+example.com jsBody://{custom.js}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Enable protocol
+==================
+
+example.com enable://capture
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Disable protocol
+==================
+
+example.com disable://cache
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Filter protocol
+==================
+
+example.com filter://keyword
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Ignore protocol
+==================
+
+example.com ignore://
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name))))
+
+==================
+Log protocol
+==================
+
+example.com log://{log.txt}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Weinre debugging
+==================
+
+example.com weinre://debug
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Request delay
+==================
+
+example.com reqDelay://5000
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Response delay
+==================
+
+example.com resDelay://3000
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Request speed limit
+==================
+
+example.com reqSpeed://1024
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Response speed limit
+==================
+
+example.com resSpeed://512
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+CORS headers
+==================
+
+example.com reqCors://enable
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Redirect
+==================
+
+example.com redirect://https://new-site.com
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Proxy with authentication
+==================
+
+example.com proxy://user:pass@127.0.0.1:8080
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+SOCKS proxy
+==================
+
+example.com socks://127.0.0.1:1080
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+PAC proxy
+==================
+
+example.com pac://{proxy.pac}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Host mapping
+==================
+
+example.com host://127.0.0.1
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Delete headers
+==================
+
+example.com delete://req.headers.cookie
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Header replace
+==================
+
+example.com headerReplace://{replace.json}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))

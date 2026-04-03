@@ -1,0 +1,36 @@
+# Ignore build outputs
+/build
+/node_modules
+/target
+
+# Ignore generated files
+/src/parser.c
+/src/tree_sitter/
+*.o
+*.so
+*.dylib
+*.dll
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore npm/yarn files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Ignore test outputs
+/test/results
+
+# Ignore cargo files
+Cargo.lock

@@ -1,0 +1,250 @@
+# Whistle Rules Examples
+
+# ==========================================
+# Basic Mapping
+# ==========================================
+
+# Map domain to local file
+www.example.com file:///path/to/index.html
+
+# Map with wildcard
+*.example.com file:///path/to/directory
+
+# ==========================================
+# Regular Expressions
+# ==========================================
+
+# Match URLs with regex
+/^https?:\/\/api\.example\.com/i https://test-api.example.com
+
+# Dollar regex (simplified)
+$api\.example\.com proxy://127.0.0.1:8080
+
+# ==========================================
+# IP and Port Patterns
+# ==========================================
+
+# Match specific port
+:8080 proxy://127.0.0.1:9090
+
+# IPv4 address
+127.0.0.1:8080 enable://capture
+
+# IPv6 address
+[::1]:8080 proxy://localhost:9090
+
+# ==========================================
+# Proxy Configuration
+# ==========================================
+
+# HTTP proxy
+example.com proxy://127.0.0.1:8080
+
+# HTTPS proxy
+example.com https-proxy://127.0.0.1:8443
+
+# SOCKS proxy
+example.com socks://127.0.0.1:1080
+
+# Proxy with authentication
+example.com proxy://user:pass@127.0.0.1:8080
+
+# PAC proxy
+example.com pac://{proxy.pac}
+
+# ==========================================
+# Request Modification
+# ==========================================
+
+# Modify request headers
+example.com reqHeaders://{headers.json}
+
+# Change HTTP method
+example.com method://POST
+
+# Override user agent
+example.com ua://Mozilla/5.0
+
+# Add authentication
+example.com auth://user:password
+
+# Modify request body
+example.com reqBody://{request.json}
+
+# URL parameters
+example.com urlParams://{params.json}
+
+# ==========================================
+# Response Modification
+# ==========================================
+
+# Modify response headers
+example.com resHeaders://{headers.json}
+
+# Replace response body
+example.com resBody://{response.json}
+
+# Change status code
+example.com statusCode://404
+
+# Replace status
+example.com replaceStatus://200 404
+
+# Redirect
+example.com redirect://https://new-site.com
+
+# ==========================================
+# Content Injection
+# ==========================================
+
+# Inject HTML
+example.com htmlAppend://{footer.html}
+example.com htmlPrepend://{header.html}
+example.com htmlBody://{page.html}
+
+# Inject CSS
+example.com cssAppend://{custom.css}
+example.com cssPrepend://{reset.css}
+
+# Inject JavaScript
+example.com jsAppend://{analytics.js}
+example.com jsPrepend://{polyfill.js}
+example.com jsBody://{app.js}
+
+# ==========================================
+# Throttling
+# ==========================================
+
+# Request delay (ms)
+example.com reqDelay://5000
+
+# Response delay (ms)
+example.com resDelay://3000
+
+# Request speed limit (bytes/s)
+example.com reqSpeed://1024
+
+# Response speed limit (bytes/s)
+example.com resSpeed://512
+
+# ==========================================
+# Debugging
+# ==========================================
+
+# Enable weinre debugging
+example.com weinre://debug
+
+# Enable logging
+example.com log://{request.log}
+
+# ==========================================
+# Control Flow
+# ==========================================
+
+# Enable capture
+example.com enable://capture
+
+# Disable cache
+example.com disable://cache
+
+# Filter requests
+example.com filter://keyword
+
+# Ignore rules
+example.com ignore://
+
+# Skip proxy
+example.com skip://
+
+# ==========================================
+# Advanced Features
+# ==========================================
+
+# Negation (exclude pattern)
+!www.example.com disable://cache
+
+# Multiple operators
+*.example.com reqHeaders://{req.json} resHeaders://{res.json} weinre://debug
+
+# Reference other rules
+@commonRule http://example.com
+
+# Macro patterns
+{apiServers} proxy://127.0.0.1:8080
+
+# ==========================================
+# Plugins
+# ==========================================
+
+# Plugin variable
+%vase=config.json
+
+# Use plugin with full name
+example.com whistle.inspect://
+
+# Use plugin with short name (if enabled)
+example.com plugin.vase://{config.json}
+
+# Pipe to plugin
+example.com pipe://custom-plugin
+
+# ==========================================
+# Host Mapping
+# ==========================================
+
+# Simple host mapping
+example.com host://127.0.0.1
+
+# Extended host mapping
+example.com xhost://custom-host
+
+# ==========================================
+# File Mapping
+# ==========================================
+
+# Map to file
+example.com file:///path/to/file.html
+
+# Map to raw file
+example.com rawfile:///path/to/data.bin
+
+# Map to template
+example.com tpl://{template.tpl}
+
+# Extended file mapping
+example.com xfile:///path/to/file.html
+
+# ==========================================
+# Special Protocols
+# ==========================================
+
+# Header replacement
+example.com headerReplace://{replace.json}
+
+# Delete headers/cookies
+example.com delete://req.headers.cookie
+
+# CORS headers
+example.com reqCors://enable
+
+# TLS options
+example.com tlsOptions://{tls.json}
+
+# Line properties
+example.com lineProps://{props.json}
+
+# ==========================================
+# Complex Examples
+# ==========================================
+
+# Development environment setup
+*.dev.example.com host://127.0.0.1 weinre://dev enable://capture
+
+# API mocking
+/^https?:\/\/api\.example\.com\/users/i resBody://{users.json} statusCode://200
+
+# Performance testing
+example.com resDelay://3000 resSpeed://512 log://{perf.log}
+
+# Security testing
+example.com reqHeaders://{security-headers.json} resHeaders://{csp-headers.json}

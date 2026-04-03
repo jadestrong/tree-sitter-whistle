@@ -1,0 +1,116 @@
+==================
+Plugin with full name
+==================
+
+example.com plugin.vase://
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (plugin_operator
+      plugin: (plugin_full_name))))
+
+==================
+Whistle plugin with full name
+==================
+
+example.com whistle.inspect://
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (plugin_operator
+      plugin: (plugin_full_name))))
+
+==================
+Plugin variable with equals
+==================
+
+%vase=config.json example.com
+
+---
+
+(source_file
+  (rule
+    pattern: (plugin_var)
+    operator: (simple_value)))
+
+==================
+Plugin variable with dot
+==================
+
+%vase.key example.com whistle.vase://
+
+---
+
+(source_file
+  (rule
+    pattern: (plugin_var)
+    operator: (simple_value)
+    operator: (plugin_operator
+      plugin: (plugin_full_name))))
+
+==================
+Pipe protocol
+==================
+
+example.com pipe://plugin-name
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+SNI callback
+==================
+
+example.com sniCallback://plugin-name
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Multiple plugins
+==================
+
+example.com whistle.inspect:// plugin.vase://
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (plugin_operator
+      plugin: (plugin_full_name))
+    operator: (plugin_operator
+      plugin: (plugin_full_name))))
+
+==================
+Plugin with value
+==================
+
+example.com whistle.vase://{config.json}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (plugin_operator
+      plugin: (plugin_full_name)
+      value: (operator_value))))

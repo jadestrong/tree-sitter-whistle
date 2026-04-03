@@ -1,0 +1,42 @@
+{
+  "name": "tree-sitter-whistle",
+  "version": "0.1.0",
+  "description": "Whistle rules grammar for tree-sitter",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "whistle",
+    "parser",
+    "grammar",
+    "syntax"
+  ],
+  "author": "Whistle Team",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.8"
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp rebuild",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse",
+    "highlight": "tree-sitter highlight"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.whistle",
+      "file-types": [
+        "whistle",
+        "w2"
+      ],
+      "highlights": "queries/highlights.scm"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avwo/whistle.git",
+    "directory": "tree-sitter-whistle"
+  }
+}

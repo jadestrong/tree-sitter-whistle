@@ -1,0 +1,330 @@
+==================
+Simple comment
+==================
+
+# This is a comment
+
+---
+
+(source_file
+  (comment))
+
+==================
+Simple rule with file protocol
+==================
+
+www.example.com file:///path/to/file
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Wildcard pattern
+==================
+
+*.example.com proxy://127.0.0.1:8080
+
+---
+
+(source_file
+  (rule
+    pattern: (wildcard_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Regular expression pattern
+==================
+
+/^https?:\/\/example\.com/i https://target.com
+
+---
+
+(source_file
+  (rule
+    pattern: (regexp_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Dollar regexp pattern
+==================
+
+$example\.com file:///local/path
+
+---
+
+(source_file
+  (rule
+    pattern: (dollar_regexp)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Port pattern
+==================
+
+:8080 proxy://127.0.0.1:9090
+
+---
+
+(source_file
+  (rule
+    pattern: (port_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+IPv4 address
+==================
+
+127.0.0.1:8080 enable://capture
+
+---
+
+(source_file
+  (rule
+    pattern: (ipv4_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+IPv6 address with brackets
+==================
+
+[::1]:8080 proxy://localhost:9090
+
+---
+
+(source_file
+  (rule
+    pattern: (ipv6_with_brackets)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Negation pattern
+==================
+
+!www.example.com disable://cache
+
+---
+
+(source_file
+  (rule
+    negation: (negation)
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Multiple operators
+==================
+
+www.example.com reqHeaders://{headers.json} resBody://{response.json}
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+At reference
+==================
+
+@myRule http://example.com
+
+---
+
+(source_file
+  (rule
+    pattern: (at_reference)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Macro pattern with braces
+==================
+
+{macroName} file:///path/to/file
+
+---
+
+(source_file
+  (rule
+    pattern: (macro_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Macro pattern with angle brackets
+==================
+
+<template> tpl:///path/to/template
+
+---
+
+(source_file
+  (rule
+    pattern: (macro_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Plugin variable
+==================
+
+%vase=config.json example.com whistle.vase://
+
+---
+
+(source_file
+  (rule
+    pattern: (plugin_var)
+    operator: (simple_value)
+    operator: (plugin_operator
+      plugin: (plugin_full_name))))
+
+==================
+Plugin with full name
+==================
+
+example.com whistle.inspect://
+
+---
+
+(source_file
+  (rule
+    pattern: (domain_pattern)
+    operator: (plugin_operator
+      plugin: (plugin_full_name))))
+
+==================
+Windows path
+==================
+
+C:\path\to\file file:///remote/path
+
+---
+
+(source_file
+  (rule
+    pattern: (local_path_windows)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Unix path
+==================
+
+/usr/local/file proxy://localhost:8080
+
+---
+
+(source_file
+  (rule
+    pattern: (local_path_unix)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Mixed comments and rules
+==================
+
+# Map example.com to local file
+www.example.com file:///path/to/file
+
+# Proxy API requests
+api.example.com proxy://127.0.0.1:8080
+
+---
+
+(source_file
+  (comment)
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value)))
+  (comment)
+  (rule
+    pattern: (domain_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Complex rule with multiple protocols
+==================
+
+*.example.com reqHeaders://{req.json} resHeaders://{res.json} weinre://debug
+
+---
+
+(source_file
+  (rule
+    pattern: (wildcard_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+URL pattern starting with caret
+==================
+
+^example\.com/api https://api.target.com
+
+---
+
+(source_file
+  (rule
+    pattern: (url_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
+
+==================
+Dot domain pattern
+==================
+
+.example.com proxy://localhost:8080
+
+---
+
+(source_file
+  (rule
+    pattern: (wildcard_pattern)
+    operator: (protocol_operator
+      protocol: (protocol_name)
+      value: (operator_value))))
