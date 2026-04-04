@@ -67,7 +67,8 @@ example.com pipe://plugin-name
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 SNI callback
@@ -82,7 +83,8 @@ example.com sniCallback://plugin-name
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Multiple plugins
@@ -113,4 +115,8 @@ example.com whistle.vase://{config.json}
     pattern: (domain_pattern)
     operator: (plugin_operator
       plugin: (plugin_full_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))

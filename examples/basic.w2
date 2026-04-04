@@ -166,11 +166,9 @@ example.com skip://
 # Multiple operators
 *.example.com reqHeaders://{req.json} resHeaders://{res.json} weinre://debug
 
-# Reference other rules
-@commonRule http://example.com
-
-# Macro patterns
-{apiServers} proxy://127.0.0.1:8080
+# Reference external rules file
+@/path/to/rules.txt file://fallback
+@~/configs/whistle-rules.txt proxy://127.0.0.1:8080
 
 # ==========================================
 # Plugins

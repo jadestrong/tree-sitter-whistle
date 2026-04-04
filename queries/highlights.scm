@@ -113,8 +113,16 @@
 ; Values
 ; ========================================
 
-; Operator values
-(operator_value) @string
+; Value references - braces highlighted as punctuation
+(brace_open) @punctuation.bracket
+(brace_close) @punctuation.bracket
+
+; Reference name inside braces
+(reference_name) @variable
+
+; Plain text values
+(value_text_start) @string
+(value_text) @string
 
 ; Simple values
 (simple_value) @string

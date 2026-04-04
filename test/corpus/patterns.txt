@@ -22,7 +22,8 @@ www.example.com file:///path/to/file
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Wildcard pattern
@@ -37,7 +38,8 @@ Wildcard pattern
     pattern: (wildcard_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Regular expression pattern
@@ -52,7 +54,8 @@ Regular expression pattern
     pattern: (regexp_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Dollar regexp pattern
@@ -67,7 +70,8 @@ $example\.com file:///local/path
     pattern: (dollar_regexp)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Port pattern
@@ -82,7 +86,8 @@ Port pattern
     pattern: (port_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 IPv4 address
@@ -97,7 +102,8 @@ IPv4 address
     pattern: (ipv4_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 IPv6 address with brackets
@@ -112,7 +118,8 @@ IPv6 address with brackets
     pattern: (ipv6_with_brackets)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Negation pattern
@@ -128,10 +135,11 @@ Negation pattern
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
-Multiple operators
+Multiple operators with value references
 ==================
 
 www.example.com reqHeaders://{headers.json} resBody://{response.json}
@@ -143,16 +151,24 @@ www.example.com reqHeaders://{headers.json} resBody://{response.json}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
-At reference
+At reference (external rules file)
 ==================
 
-@myRule http://example.com
+@/path/to/rules.txt proxy://127.0.0.1:8080
 
 ---
 
@@ -161,22 +177,8 @@ At reference
     pattern: (at_reference)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
-
-==================
-Macro pattern with braces
-==================
-
-{macroName} file:///path/to/file
-
----
-
-(source_file
-  (rule
-    pattern: (macro_pattern)
-    operator: (protocol_operator
-      protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Macro pattern with angle brackets
@@ -191,7 +193,8 @@ Macro pattern with angle brackets
     pattern: (macro_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Plugin variable
@@ -235,7 +238,8 @@ C:\path\to\file file:///remote/path
     pattern: (local_path_windows)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Unix path
@@ -250,7 +254,8 @@ Unix path
     pattern: (local_path_unix)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Mixed comments and rules
@@ -270,13 +275,15 @@ api.example.com proxy://127.0.0.1:8080
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value)))
+      value: (operator_value
+        (value_text_start))))
   (comment)
   (rule
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Complex rule with multiple protocols
@@ -291,13 +298,22 @@ Complex rule with multiple protocols
     pattern: (wildcard_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 URL pattern starting with caret
@@ -312,7 +328,8 @@ URL pattern starting with caret
     pattern: (url_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Dot domain pattern
@@ -327,4 +344,5 @@ Dot domain pattern
     pattern: (wildcard_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))

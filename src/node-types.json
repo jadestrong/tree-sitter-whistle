@@ -1,5 +1,32 @@
 [
   {
+    "type": "operator_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "value_reference",
+          "named": true
+        },
+        {
+          "type": "value_reference_start",
+          "named": true
+        },
+        {
+          "type": "value_text",
+          "named": true
+        },
+        {
+          "type": "value_text_start",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "plugin_operator",
     "named": true,
     "fields": {
@@ -171,6 +198,76 @@
     }
   },
   {
+    "type": "value_reference",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "reference_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "brace_close",
+          "named": true
+        },
+        {
+          "type": "brace_open",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value_reference_start",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "reference_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "brace_close",
+          "named": true
+        },
+        {
+          "type": "brace_open",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "value_text_start",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\n",
     "named": false
   },
@@ -184,6 +281,14 @@
   },
   {
     "type": "at_reference",
+    "named": true
+  },
+  {
+    "type": "brace_close",
+    "named": true
+  },
+  {
+    "type": "brace_open",
     "named": true
   },
   {
@@ -227,10 +332,6 @@
     "named": true
   },
   {
-    "type": "operator_value",
-    "named": true
-  },
-  {
     "type": "plugin_full_name",
     "named": true
   },
@@ -244,6 +345,10 @@
   },
   {
     "type": "protocol_name",
+    "named": true
+  },
+  {
+    "type": "reference_name",
     "named": true
   },
   {

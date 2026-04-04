@@ -11,7 +11,11 @@ example.com reqHeaders://{headers.json}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
 Response body replacement
@@ -26,7 +30,11 @@ api.example.com resBody://{response.json}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
 Method override
@@ -41,7 +49,8 @@ example.com method://POST
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 User agent override
@@ -56,7 +65,8 @@ example.com ua://Mozilla/5.0
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Status code modification
@@ -71,7 +81,8 @@ example.com statusCode://404
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 HTML injection
@@ -86,7 +97,11 @@ example.com htmlAppend://{script.html}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
 CSS injection
@@ -101,7 +116,11 @@ example.com cssPrepend://{custom.css}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
 JavaScript injection
@@ -116,7 +135,11 @@ example.com jsBody://{custom.js}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
 Enable protocol
@@ -131,7 +154,8 @@ example.com enable://capture
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Disable protocol
@@ -146,7 +170,8 @@ example.com disable://cache
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Filter protocol
@@ -161,7 +186,8 @@ example.com filter://keyword
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Ignore protocol
@@ -190,7 +216,11 @@ example.com log://{log.txt}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
 Weinre debugging
@@ -205,7 +235,8 @@ example.com weinre://debug
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Request delay
@@ -220,7 +251,8 @@ example.com reqDelay://5000
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Response delay
@@ -235,7 +267,8 @@ example.com resDelay://3000
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Request speed limit
@@ -250,7 +283,8 @@ example.com reqSpeed://1024
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Response speed limit
@@ -265,7 +299,8 @@ example.com resSpeed://512
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 CORS headers
@@ -280,7 +315,8 @@ example.com reqCors://enable
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Redirect
@@ -295,7 +331,8 @@ example.com redirect://https://new-site.com
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Proxy with authentication
@@ -310,7 +347,8 @@ example.com proxy://user:pass@127.0.0.1:8080
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 SOCKS proxy
@@ -325,7 +363,8 @@ example.com socks://127.0.0.1:1080
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 PAC proxy
@@ -340,7 +379,11 @@ example.com pac://{proxy.pac}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))
 
 ==================
 Host mapping
@@ -355,7 +398,8 @@ example.com host://127.0.0.1
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Delete headers
@@ -370,7 +414,8 @@ example.com delete://req.headers.cookie
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_text_start)))))
 
 ==================
 Header replace
@@ -385,4 +430,8 @@ example.com headerReplace://{replace.json}
     pattern: (domain_pattern)
     operator: (protocol_operator
       protocol: (protocol_name)
-      value: (operator_value))))
+      value: (operator_value
+        (value_reference_start
+          (brace_open)
+          name: (reference_name)
+          (brace_close))))))

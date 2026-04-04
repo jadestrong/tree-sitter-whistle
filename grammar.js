@@ -146,10 +146,9 @@ module.exports = grammar({
       /\/[^\s#/]+\/[^\s#]*/
     )),
 
-    // Macro/Group: {xxx}, <xxx>, (xxx)
+    // Macro/Group: <xxx>, (xxx) - note: {xxx} is NOT a valid pattern, only used in operator values
     macro_pattern: $ => token(
       choice(
-        /\{[^}\s]+\}/,
         /<[^>\s]+>/,
         /\([^)\s]+\)/
       )
@@ -161,8 +160,8 @@ module.exports = grammar({
     // Plugin variable: %plugin=value or %plugin.key
     plugin_var: $ => token(/%[a-z\d_-]+[=.][^\s#]*/i),
 
-    // Domain pattern (fallback) - must not start with ! (negation prefix)
-    domain_pattern: $ => token(/[^\s#:!][^\s#:]*/),
+    // Domain pattern (fallback) - must not start with ! (negation) or { (value reference)
+    domain_pattern: $ => token(/[^\s#:!{][^\s#:]*/),
 
     // ========== Operator Definitions ==========
     _operator: $ => choice(
@@ -190,10 +189,48 @@ module.exports = grammar({
 
     plugin_full_name: $ => token(prec(4, /(?:plugin|whistle)\.[a-z\d_-]+/i)),
 
-    // Operator value (everything until space or comment) - highest priority when immediately after ://
-    operator_value: $ => token.immediate(prec(10, /[^\s#]+/)),
+    // Operator value - sequence of text and/or {references}
+    operator_value: $ => prec.right(seq(
+      $._operator_value_start,
+      repeat($._operator_value_part)
+    )),
 
-    // Simple value (fallback for any token) - lowest priority
-    simple_value: $ => token(prec(-1, /[^\s#]+/))
+    // First part must be immediate after ://
+    _operator_value_start: $ => choice(
+      $.value_reference_start,
+      $.value_text_start
+    ),
+
+    // Subsequent parts
+    _operator_value_part: $ => choice(
+      $.value_reference,
+      $.value_text
+    ),
+
+    // Value reference starting immediately after ://: {name}
+    value_reference_start: $ => seq(
+      alias(token.immediate('{'), $.brace_open),
+      field('name', $.reference_name),
+      alias('}', $.brace_close)
+    ),
+
+    // Value reference in the middle: {name}
+    value_reference: $ => seq(
+      alias(token.immediate('{'), $.brace_open),
+      field('name', $.reference_name),
+      alias('}', $.brace_close)
+    ),
+
+    // Reference name inside braces
+    reference_name: $ => token.immediate(/[^}\s]+/),
+
+    // Text starting immediately after ://
+    value_text_start: $ => token.immediate(prec(5, /[^\s#{}]+/)),
+
+    // Text in the middle of operator value
+    value_text: $ => token.immediate(prec(5, /[^\s#{}]+/)),
+
+    // Simple value (fallback for any token) - lowest priority, excludes { which starts value references
+    simple_value: $ => token(prec(-1, /[^\s#{][^\s#]*/))
   }
 });
